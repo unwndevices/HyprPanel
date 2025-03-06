@@ -426,6 +426,15 @@ const options = mkOptions(CONFIG, {
                         icon_background: opt(colors.base2),
                         spacing: opt('0.5em'),
                     },
+                    windowstash: {
+                        enableBorder: opt(false),
+                        border: opt(colors.teal),
+                        background: opt(colors.base2),
+                        text: opt(colors.teal),
+                        icon: opt(colors.teal),
+                        icon_background: opt(colors.base2),
+                        spacing: opt('0.5rem'),
+                    },
                 },
             },
             menus: {
@@ -1051,8 +1060,95 @@ const options = mkOptions(CONFIG, {
         },
         customModules: {
             scrollSpeed: opt(5),
+            windowstash: {
+                icon: opt('󰀀'),
+                label: opt(true),
+                pollingInterval: opt(1000),
+                autoHide: opt(true),
+                iconMap: opt<Record<string, string>>({
+                    // Terminal emulators
+                    'kitty': '󰄛',
+                    'Alacritty': '󰄛',
+                    'gnome-terminal': '󰄛',
+                    'xterm': '󰄛',
+                    'konsole': '󰄛',
+                    'foot': '󰄛',
+
+                    // Browsers
+                    'firefox': '󰈹',
+                    'Firefox': '󰈹',
+                    'chromium': '󰊯',
+                    'Chromium': '󰊯',
+                    'Google-chrome': '󰊯',
+                    'brave-browser': '󰊯',
+                    'microsoft-edge': '󰇩',
+                    'vivaldi-stable': '󰖟',
+
+                    // Text editors and IDEs
+                    'code': '󰨞',
+                    'Code': '󰨞',
+                    'code-oss': '󰨞',
+                    'vscodium': '󰨞',
+                    'nvim': '󰕷',
+                    'Neovim': '󰕷',
+                    'vim': '󰕷',
+                    'Vim': '󰕷',
+                    'jetbrains-idea': '󱈙',
+                    'jetbrains-pycharm': '󱈙',
+                    'jetbrains-webstorm': '󱈙',
+                    'jetbrains-clion': '󱈙',
+                    'sublime_text': '󰘦',
+                    'Sublime_text': '󰘦',
+
+                    // File managers
+                    'thunar': '󰉋',
+                    'Thunar': '󰉋',
+                    'nautilus': '󰉋',
+                    'dolphin': '󰉋',
+                    'pcmanfm': '󰉋',
+
+                    // Media
+                    'spotify': '󰓇',
+                    'Spotify': '󰓇',
+                    'vlc': '󰕼',
+                    'mpv': '󰕼',
+
+                    // Communication
+                    'discord': '󰙯',
+                    'Discord': '󰙯',
+                    'slack': '󰒱',
+                    'Slack': '󰒱',
+                    'telegram-desktop': '󰔁',
+                    'signal': '󰍡',
+
+                    // Image editing
+                    'gimp': '󰏘',
+                    'Gimp': '󰏘',
+                    'inkscape': '󱁤',
+                    'Inkscape': '󱁤',
+
+                    // Office
+                    'libreoffice-writer': '󰈙',
+                    'libreoffice-calc': '󰧮',
+                    'libreoffice-impress': '󰐨',
+
+                    // System
+                    'pavucontrol': '󰕾',
+                    'blueman-manager': '󰂯',
+                    'nm-connection-editor': '󰖟',
+                    'gnome-system-monitor': '󰨇',
+                    'htop': '󰨇',
+                    'btop': '󰨇',
+
+                    // Games
+                    'steam': '󰓓',
+                    'Steam': '󰓓',
+                    'lutris': '󰊗',
+                    'Lutris': '󰊗',
+                }),
+            },
             ram: {
-                icon: opt(''),
+                icon: opt(''),
                 label: opt(true),
                 labelType: opt<ResourceLabelType>('percentage'),
                 round: opt(true),

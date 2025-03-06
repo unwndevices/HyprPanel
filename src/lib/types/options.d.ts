@@ -13,13 +13,13 @@ export type MkOptionsResult = {
 
 export type RecursiveOptionsObject = {
     [key: string]:
-        | RecursiveOptionsObject
-        | Opt<string>
-        | Opt<number>
-        | Opt<boolean>
-        | Variable<string>
-        | Variable<number>
-        | Variable<boolean>;
+    | RecursiveOptionsObject
+    | Opt<string>
+    | Opt<number>
+    | Opt<boolean>
+    | Variable<string>
+    | Variable<number>
+    | Variable<boolean>;
 };
 
 export type BarLocation = 'top' | 'bottom';
@@ -48,7 +48,8 @@ export type BarModule =
     | 'systray'
     | 'hypridle'
     | 'hyprsunset'
-    | 'cava';
+    | 'cava'
+    | 'windowstash';
 
 export type BarLayout = {
     left: BarModule[];

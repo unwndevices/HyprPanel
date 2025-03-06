@@ -1,0 +1,38 @@
+// Additional styling for windowstash module
+// This complements the styling from the styleModule mixin in style.scss
+
+.bar {
+
+    // Style for the windowstash container
+    .bar_item_box_visible.windowstash {
+        padding: 0 0px;
+    }
+
+    // Style for the windowstash buttons
+    .bar-button.windowstash {
+        padding: 0;
+        margin: 0 0px;
+
+        &:hover {
+            background-color: if($bar-buttons-monochrome,
+                    rgba($bar-buttons-hover, 0.2),
+                    rgba($bar-buttons-modules-windowstash-background, 0.2));
+        }
+
+        &:active {
+            background-color: if($bar-buttons-monochrome,
+                    rgba($bar-buttons-hover, 0.3),
+                    rgba($bar-buttons-modules-windowstash-background, 0.3));
+        }
+    }
+
+    // Style for the windowstash icons
+    .bar-button-icon.windowstash {
+        padding: $bar-buttons-padding_y $bar-buttons-padding_x;
+
+        .txt-icon {
+            font-size: 1.2rem;
+            color: $bar-buttons-text;
+        }
+    }
+}

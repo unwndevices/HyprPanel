@@ -354,6 +354,31 @@ export const CustomModuleSettings = (): JSX.Element => {
                 <Option opt={options.bar.customModules.hypridle.scrollUp} title="Scroll Up" type="string" />
                 <Option opt={options.bar.customModules.hypridle.scrollDown} title="Scroll Down" type="string" />
 
+                {/* Window Stash Section */}
+                <Header title="Window Stash" />
+                <Option opt={options.bar.customModules.windowstash.icon} title="Icon" type="string" />
+                <Option opt={options.bar.customModules.windowstash.label} title="Show Label" type="boolean" />
+
+                <Option
+                    opt={options.theme.bar.buttons.modules.windowstash.enableBorder}
+                    title="Button Border"
+                    type="boolean"
+                />
+                <Option
+                    opt={options.bar.customModules.windowstash.pollingInterval}
+                    title="Polling Interval"
+                    type="number"
+                    min={100}
+                    max={60 * 24 * 1000}
+                    increment={1000}
+                />
+                <Option
+                    opt={options.bar.customModules.windowstash.iconMap}
+                    title="Custom Icon Map"
+                    subtitle="Map window class names to custom icons"
+                    type="object"
+                />
+
                 {/* Cava Section */}
                 <Header title="Cava" />
                 <Option
