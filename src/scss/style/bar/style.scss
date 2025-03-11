@@ -36,8 +36,7 @@
  * #        Styling Function       #
  * #################################
  */
-@mixin styleModule(
-    $class,
+@mixin styleModule($class,
     $textColor,
     $iconColor,
     $iconBackground,
@@ -45,24 +44,20 @@
     $spacing,
     $borderEnabled,
     $borderColor,
-    $fontSize: 1em
-) {
+    $fontSize: 1em) {
     $bar-button-background-opacity-ratio: $bar-buttons-background_opacity * 0.01;
     $transparency-value: 1 - $bar-button-background-opacity-ratio;
 
     $bar-button-background-hover-opacity-ratio: $bar-buttons-background_hover_opacity * 0.01;
     $transparency-value-hover: 1 - $bar-button-background-hover-opacity-ratio;
+
     .bar_item_box_visible {
         &.#{$class} {
-            background: transparentize(
-                if($bar-buttons-monochrome, $bar-buttons-background, $labelBackground),
-                $transparency-value
-            );
-            border: if(
-                $borderEnabled or $bar-buttons-enableBorders,
-                $bar-buttons-borderSize solid if($bar-buttons-monochrome, $bar-buttons-borderColor, $borderColor),
-                0em
-            );
+            background: transparentize(if($bar-buttons-monochrome, $bar-buttons-background, $labelBackground),
+                    $transparency-value );
+            border: if($borderEnabled or $bar-buttons-enableBorders,
+                    $bar-buttons-borderSize solid if($bar-buttons-monochrome, $bar-buttons-borderColor, $borderColor),
+                    0em);
 
             &.style2 {
                 background: transparent;
@@ -90,16 +85,12 @@
             background: if($bar-buttons-monochrome, $bar-buttons-icon_background, $iconBackground);
             padding-right: $spacing;
             color: if($bar-buttons-monochrome, $bar-buttons-icon, $iconColor);
-            border-top-left-radius: if(
-                $borderEnabled or $bar-buttons-enableBorders,
-                $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
-                $bar-buttons-radius
-            );
-            border-bottom-left-radius: if(
-                $borderEnabled or $bar-buttons-enableBorders,
-                $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
-                $bar-buttons-radius
-            );
+            border-top-left-radius: if($borderEnabled or $bar-buttons-enableBorders,
+                    $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
+                    $bar-buttons-radius );
+            border-bottom-left-radius: if($borderEnabled or $bar-buttons-enableBorders,
+                    $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
+                    $bar-buttons-radius );
         }
 
         .module-label.#{$class} {
@@ -109,18 +100,15 @@
             border-top-left-radius: 0em;
             border-bottom-left-radius: 0em;
         }
+
         &.no-label.#{$class} {
             .module-icon {
-                border-top-right-radius: if(
-                    $borderEnabled or $bar-buttons-enableBorders,
-                    $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
-                    $bar-buttons-radius
-                );
-                border-bottom-right-radius: if(
-                    $borderEnabled or $bar-buttons-enableBorders,
-                    $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
-                    $bar-buttons-radius
-                );
+                border-top-right-radius: if($borderEnabled or $bar-buttons-enableBorders,
+                        $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
+                        $bar-buttons-radius );
+                border-bottom-right-radius: if($borderEnabled or $bar-buttons-enableBorders,
+                        $bar-buttons-radius * $bar-buttons-innerRadiusMultiplier,
+                        $bar-buttons-radius );
             }
         }
     }
@@ -131,8 +119,7 @@
  * #      Ram Module Styling       #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'ram',
     // label color
@@ -149,16 +136,14 @@
     // if border enabled
     $bar-buttons-modules-ram-enableBorder,
     // border color
-    $bar-buttons-modules-ram-border
-);
+    $bar-buttons-modules-ram-border);
 
 /*
  * #################################
  * #      Cpu Module Styling       #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'cpu',
     // label color
@@ -184,8 +169,7 @@
  * #    Cpu Temp Module Styling    #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'cpu-temp',
     // label color
@@ -211,8 +195,7 @@
  * #    Storage Module Styling     #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'storage',
     // label color
@@ -238,8 +221,7 @@
  * #    Netstat Module Styling     #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'netstat',
     // label color
@@ -265,8 +247,7 @@
  * #    KB Layout Module Styling   #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'kblayout',
     // label color
@@ -292,8 +273,7 @@
  * #    Updates Module Styling     #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'updates',
     // label color
@@ -319,8 +299,7 @@
  * #    Submap Module Styling      #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'submap',
     // label color
@@ -346,8 +325,7 @@
  * #    Weather Module Styling     #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'weather-custom',
     // label color
@@ -373,8 +351,7 @@
  * #    Power Module Styling       #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'powermodule',
     // label color
@@ -400,8 +377,7 @@
  * #      Hyprsunset Styling       #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'hyprsunset',
     // label color
@@ -427,8 +403,7 @@
  * #       Hypridle Styling        #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'hypridle',
     // label color
@@ -454,8 +429,7 @@
  * #       Cava Styling            #
  * #################################
  */
-@include styleModule(
-    //
+@include styleModule( //
     // class name
     'cava',
     // label color
@@ -472,6 +446,32 @@
     $bar-buttons-modules-cava-enableBorder,
     // border color
     $bar-buttons-modules-cava-border,
+    // custom font size
+    1.2em //
+);
+
+/*
+ * #################################
+ * #    Window Stash Module Styling #
+ * #################################
+ */
+@include styleModule( //
+    // class name
+    'windowstash',
+    // label color
+    $bar-buttons-modules-windowstash-text,
+    // icon color
+    $bar-buttons-modules-windowstash-icon,
+    // icon background if split style is used
+    $bar-buttons-modules-windowstash-icon_background,
+    // label background
+    $bar-buttons-modules-windowstash-background,
+    // inner spacing
+    $bar-buttons-modules-windowstash-spacing,
+    // if border enabled
+    $bar-buttons-modules-windowstash-enableBorder,
+    // border color
+    $bar-buttons-modules-windowstash-border,
     // custom font size
     1.2em //
 );
