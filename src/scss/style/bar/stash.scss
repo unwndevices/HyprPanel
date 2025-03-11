@@ -11,7 +11,7 @@
     // Style for the windowstash buttons
     .bar-button.windowstash {
         padding: 0;
-        margin: 0 0px;
+        margin: 0 5px;
 
         &:hover {
             background-color: if($bar-buttons-monochrome,
@@ -21,8 +21,8 @@
 
         &:active {
             background-color: if($bar-buttons-monochrome,
-                    rgba($bar-buttons-hover, 0.3),
-                    rgba($bar-buttons-modules-windowstash-background, 0.3));
+                    rgba($bar-buttons-hover, 0.6),
+                    rgba($bar-buttons-modules-windowstash-background, 0.6));
         }
     }
 
