@@ -90,7 +90,7 @@ const tertiary_colors = {
     surface2: '#585b71',
 };
 
-const options = mkOptions(CONFIG, {
+const options = mkOptions({
     theme: {
         tooltip: {
             scaling: opt(100),
@@ -1238,6 +1238,8 @@ const options = mkOptions(CONFIG, {
             },
             updates: {
                 updateCommand: opt(`${SRC_DIR}/scripts/checkUpdates.sh -arch`),
+                updateTooltipCommand: opt(`${SRC_DIR}/scripts/checkUpdates.sh -arch -tooltip`),
+                extendedTooltip: opt(false),
                 label: opt(true),
                 padZero: opt(true),
                 autoHide: opt(false),
@@ -1375,6 +1377,9 @@ const options = mkOptions(CONFIG, {
                 enabled: opt(true),
                 interval: opt(2000),
                 enable_gpu: opt(false),
+            },
+            recording: {
+                path: opt('$HOME/Videos/Screencasts'),
             },
             controls: {
                 enabled: opt(true),

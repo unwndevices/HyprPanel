@@ -327,6 +327,7 @@ in
       bar.notifications.scrollUp = mkStrOption "";
       bar.notifications.show_total = mkBoolOption false;
       bar.scrollSpeed = mkIntOption 5;
+      bar.systray.ignore = mkStrListOption [];
       bar.volume.label = mkBoolOption true;
       bar.volume.middleClick = mkStrOption "";
       bar.volume.rightClick = mkStrOption "";
@@ -394,6 +395,7 @@ in
       menus.dashboard.powermenu.reboot = mkStrOption "systemctl reboot";
       menus.dashboard.powermenu.shutdown = mkStrOption "systemctl poweroff";
       menus.dashboard.powermenu.sleep = mkStrOption "systemctl suspend";
+      menus.dashboard.recording.path = mkStrOption "$HOME/Videos/Screencasts";
       menus.dashboard.shortcuts.enabled = mkBoolOption true;
       menus.dashboard.shortcuts.left.shortcut1.command = mkStrOption "microsoft-edge-stable";
       menus.dashboard.shortcuts.left.shortcut1.icon = mkStrOption "󰇩";
@@ -441,6 +443,7 @@ in
       notifications.monitor = mkIntOption 0;
       notifications.position = mkStrOption "top right";
       notifications.showActionsOnHover = mkBoolOption false;
+      notifications.ignore = mkStrListOption [];
       notifications.timeout = mkIntOption 7000;
       scalingPriority = mkStrOption "gdk";
       tear = mkBoolOption false;
@@ -636,7 +639,7 @@ in
   in mkIf cfg.enable {
 
     # nixpkgs.overlays = if cfg.overlay.enable then [ self.overlay ] else null;
-    nixpkgs.overlays = lib.optionals cfg.overlay.enable [ self.overlay ];
+    nixpkgs.overlays = lib.mkIf cfg.overlay.enable [ self.overlay ];
 
     home.packages = [
       package
