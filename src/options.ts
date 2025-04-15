@@ -448,6 +448,7 @@ const options = mkOptions({
                         icon: opt(colors.teal),
                         icon_background: opt(colors.base2),
                         spacing: opt('0.5rem'),
+                    },
                     worldclock: {
                         enableBorder: opt(false),
                         border: opt(colors.yellow),
