@@ -10,8 +10,6 @@ import {
     BatteryLabel,
     Clock,
     SysTray,
-
-    // Custom Modules
     Microphone,
     Ram,
     Cpu,
@@ -27,6 +25,8 @@ import {
     Hypridle,
     Cava,
     WindowStash,
+    WorldClock,
+    ModuleSeparator,
 } from './exports';
 
 import { WidgetContainer } from './shared/WidgetContainer';
@@ -37,43 +37,54 @@ import Astal from 'gi://Astal?version=3.0';
 import { bind, Variable } from 'astal';
 import { getLayoutForMonitor, isLayoutEmpty } from './utils/monitors';
 import { GdkMonitorMapper } from './utils/GdkMonitorMapper';
+import { CustomModules } from './custom_modules/CustomModules';
 
 const { layouts } = options.bar;
 const { location } = options.theme.bar;
 const { location: borderLocation } = options.theme.bar.border;
 
-const widget = {
-    battery: (): JSX.Element => WidgetContainer(BatteryLabel()),
-    dashboard: (): JSX.Element => WidgetContainer(Menu()),
-    workspaces: (monitor: number): JSX.Element => WidgetContainer(Workspaces(monitor)),
-    windowtitle: (): JSX.Element => WidgetContainer(ClientTitle()),
-    media: (): JSX.Element => WidgetContainer(Media()),
-    notifications: (): JSX.Element => WidgetContainer(Notifications()),
-    volume: (): JSX.Element => WidgetContainer(Volume()),
-    network: (): JSX.Element => WidgetContainer(Network()),
-    bluetooth: (): JSX.Element => WidgetContainer(Bluetooth()),
-    clock: (): JSX.Element => WidgetContainer(Clock()),
-    systray: (): JSX.Element => WidgetContainer(SysTray()),
-    microphone: (): JSX.Element => WidgetContainer(Microphone()),
-    ram: (): JSX.Element => WidgetContainer(Ram()),
-    cpu: (): JSX.Element => WidgetContainer(Cpu()),
-    cputemp: (): JSX.Element => WidgetContainer(CpuTemp()),
-    storage: (): JSX.Element => WidgetContainer(Storage()),
-    netstat: (): JSX.Element => WidgetContainer(Netstat()),
-    kbinput: (): JSX.Element => WidgetContainer(KbInput()),
-    updates: (): JSX.Element => WidgetContainer(Updates()),
-    submap: (): JSX.Element => WidgetContainer(Submap()),
-    weather: (): JSX.Element => WidgetContainer(Weather()),
-    power: (): JSX.Element => WidgetContainer(Power()),
-    hyprsunset: (): JSX.Element => WidgetContainer(Hyprsunset()),
-    hypridle: (): JSX.Element => WidgetContainer(Hypridle()),
-    cava: (): JSX.Element => WidgetContainer(Cava()),
-    windowstash: (): JSX.Element => WidgetContainer(WindowStash()),
+let widgets: WidgetMap = {
+    battery: () => WidgetContainer(BatteryLabel()),
+    dashboard: () => WidgetContainer(Menu()),
+    workspaces: (monitor: number) => WidgetContainer(Workspaces(monitor)),
+    windowtitle: () => WidgetContainer(ClientTitle()),
+    media: () => WidgetContainer(Media()),
+    notifications: () => WidgetContainer(Notifications()),
+    volume: () => WidgetContainer(Volume()),
+    network: () => WidgetContainer(Network()),
+    bluetooth: () => WidgetContainer(Bluetooth()),
+    clock: () => WidgetContainer(Clock()),
+    systray: () => WidgetContainer(SysTray()),
+    microphone: () => WidgetContainer(Microphone()),
+    ram: () => WidgetContainer(Ram()),
+    cpu: () => WidgetContainer(Cpu()),
+    cputemp: () => WidgetContainer(CpuTemp()),
+    storage: () => WidgetContainer(Storage()),
+    netstat: () => WidgetContainer(Netstat()),
+    kbinput: () => WidgetContainer(KbInput()),
+    updates: () => WidgetContainer(Updates()),
+    submap: () => WidgetContainer(Submap()),
+    weather: () => WidgetContainer(Weather()),
+    power: () => WidgetContainer(Power()),
+    hyprsunset: () => WidgetContainer(Hyprsunset()),
+    hypridle: () => WidgetContainer(Hypridle()),
+    cava: () => WidgetContainer(Cava()),
+    worldclock: () => WidgetContainer(WorldClock()),
+    separator: () => ModuleSeparator(),
 };
 
 const gdkMonitorMapper = new GdkMonitorMapper();
 
-export const Bar = (monitor: number): JSX.Element => {
+export const Bar = async (monitor: number): Promise<JSX.Element> => {
+    try {
+        const customWidgets = await CustomModules.build();
+        widgets = {
+            ...widgets,
+            ...customWidgets,
+        };
+    } catch (error) {
+        console.log(error);
+    }
     const hyprlandMonitor = gdkMonitorMapper.mapGdkToHyprland(monitor);
 
     const computeVisibility = bind(layouts).as(() => {
@@ -116,22 +127,22 @@ export const Bar = (monitor: number): JSX.Element => {
         const foundLayout = getLayoutForMonitor(hyprlandMonitor, currentLayouts);
 
         return foundLayout.left
-            .filter((mod) => Object.keys(widget).includes(mod))
-            .map((w) => widget[w](hyprlandMonitor));
+            .filter((mod) => Object.keys(widgets).includes(mod))
+            .map((w) => widgets[w](hyprlandMonitor));
     });
     const middleBinding = Variable.derive([bind(layouts)], (currentLayouts) => {
         const foundLayout = getLayoutForMonitor(hyprlandMonitor, currentLayouts);
 
         return foundLayout.middle
-            .filter((mod) => Object.keys(widget).includes(mod))
-            .map((w) => widget[w](hyprlandMonitor));
+            .filter((mod) => Object.keys(widgets).includes(mod))
+            .map((w) => widgets[w](hyprlandMonitor));
     });
     const rightBinding = Variable.derive([bind(layouts)], (currentLayouts) => {
         const foundLayout = getLayoutForMonitor(hyprlandMonitor, currentLayouts);
 
         return foundLayout.right
-            .filter((mod) => Object.keys(widget).includes(mod))
-            .map((w) => widget[w](hyprlandMonitor));
+            .filter((mod) => Object.keys(widgets).includes(mod))
+            .map((w) => widgets[w](hyprlandMonitor));
     });
 
     return (
@@ -177,4 +188,8 @@ export const Bar = (monitor: number): JSX.Element => {
             </box>
         </window>
     );
+};
+
+export type WidgetMap = {
+    [K in string]: (monitor: number) => JSX.Element;
 };
